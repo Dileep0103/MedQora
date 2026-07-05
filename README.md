@@ -1,67 +1,80 @@
-# DocSpot - Seamless Appointment Booking for Health
+# 🏥 Medqora — Healthcare Appointment Booking System
+> *Care, Scheduled Simply*
 
-🩺 DocSpot is a full-stack healthcare appointment booking platform developed using the MERN Stack (MongoDB, Express.js, React.js, and Node.js).  
-The application allows patients to book appointments with doctors, manage schedules, and receive appointment updates through a responsive and user-friendly interface.
+Medqora is a full-stack MERN healthcare appointment booking platform that connects patients and doctors through a secure, role-based web application. It streamlines the process of scheduling medical appointments — making healthcare access simple, fast, and reliable.
 
 ---
+
 ## 🚀 Features
 
 ### 👤 Patient Features
-- Secure user registration and login
-- Browse doctors by specialty
-- Book doctor appointments easily
-- Upload medical records
-- View, cancel, or reschedule appointments
-- Responsive user dashboard
+- User Registration & Login
+- JWT-based Secure Authentication
+- Browse & Search Available Doctors
+- Book / Reschedule Appointments
+- View Appointment History
+- Apply for Doctor Verification
+- Real-Time Notifications
 
 ### 🩺 Doctor Features
-- Doctor login and profile management
-- Manage appointment requests
-- Approve or cancel appointments
-- View patient medical documents
-- Update appointment status
+- Doctor Application & Approval Workflow
+- Manage Incoming Appointments
+- Update Appointment Status
+- Profile Management
 
-### 🛡️ Admin Features
-- Manage doctors and users
-- Approve doctor registrations
-- Monitor appointments and platform activity
-- Maintain platform integrity
+### 👨‍💼 Admin Features
+- Admin Dashboard with Platform Statistics
+- Manage Users & Doctors
+- Approve / Reject Doctor Applications
+- Monitor All Appointments
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technologies Used |
-|----------|-------------------|
-| Frontend | React.js, HTML, CSS, JavaScript |
-| Backend | Node.js, Express.js |
-| Database | MongoDB, Mongoose |
-| Authentication | JWT, bcrypt |
-| UI Frameworks | Bootstrap, Material UI |
-| Tools | Git, GitHub, Postman |
+### Frontend
+- React.js + Vite
+- Axios
+- React Router DOM
+- Tailwind CSS
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- Multer (File Uploads)
+
+### Tools & Services
+- Git & GitHub
+- MongoDB Atlas
+- Postman
 
 ---
 
-## 📂 Folder Structure
+## 📂 Project Structure
 
-```bash
-DocSpot-Seamless-Appointment-Booking-for-Health/
-├── client/
-│   ├── public/
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       ├── redux/
-│       ├── styles/
-│       └── App.js
+```
+Medqora/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── common/       # Home, Login, Register, Notification
+│   │   │   ├── user/         # DoctorList, Appointments, ApplyDoctor
+│   │   │   └── admin/        # AdminDashboard, Users, Doctors
+│   │   ├── api/
+│   │   │   └── axiosConfig.js
+│   │   └── App.jsx
+│   └── package.json
 │
-├── server/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── config/
-│   ├── middleware/
-│   └── server.js
+├── backend/
+│   ├── controllers/          # userC.js, doctorC.js, adminC.js
+│   ├── routes/               # userRoutes, doctorRoutes, adminRoutes
+│   ├── schemas/              # userModel, docModel, appointmentModel
+│   ├── middlewares/          # authMiddleware.js
+│   ├── config/               # connectToDB.js
+│   └── package.json
 │
 └── README.md
 ```
@@ -70,79 +83,67 @@ DocSpot-Seamless-Appointment-Booking-for-Health/
 
 ## ⚙️ Installation & Setup
 
-### Prerequisites
-Make sure you have installed:
-- Node.js
-- npm
-- MongoDB Atlas or Local MongoDB
-- Git
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/Dileep0103/MedQora.git
+cd MedQora
+```
+
+### 2. Backend Setup
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+### 3. Frontend Setup (new terminal)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs at: `http://localhost:3000`  
+Backend runs at: `http://localhost:8001`
 
 ---
 
-## 🔧 Backend Setup
+## 🔐 Environment Variables
 
-```bash
-cd server
-npm install
-```
-
-Create a `.env` file inside the `server` folder and add:
+Create a `.env` file inside the `backend/` folder:
 
 ```env
-MONGO_URL=your_mongodb_connection
-JWT_SECRET=your_secret_key
-PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_KEY=your_jwt_secret_key
+PORT=8001
 ```
 
-Start backend server:
-
-```bash
-npm start
-```
+> ⚠️ Never commit your `.env` file to GitHub. Add it to `.gitignore`.
 
 ---
 
-## 💻 Frontend Setup
+## 🎯 Future Enhancements
 
-```bash
-cd client
-npm install
-npm start
-```
-
-The application will run on:
-
-```bash
-http://localhost:3000
-```
-
----
-
-## 🔮 Future Enhancements
-
-- Video consultation support
-- Online payment integration
-- Mobile application support
-- Multi-language support
-- Advanced health analytics dashboard
-
----
-
-## 📸 Screenshots
-
-Add your project screenshots here.
+- 💳 Online Payment Integration
+- 📹 Video Consultation
+- 📧 Email Notifications
+- 📋 Prescription Management
+- 🤖 AI-based Doctor Recommendations
 
 ---
 
 ## 👨‍💻 Author
 
-Dileep Kumar
+**Valluri Dileep Kumar**
 
-GitHub Repository:  
-https://github.com/Dileep0103/DocSpot-Seamless-Appointment-Booking-for-Health
+- 🔗 GitHub: [Dileep0103](https://github.com/Dileep0103)
+- 💼 LinkedIn: [Valluri Dileep Kumar](https://www.linkedin.com/in/valluri-dileep-kumar/)
 
 ---
 
-## 📄 License
+## ⭐ Support
 
-This project is developed for educational and learning purposes.
+If you found this project useful, consider giving it a star ⭐ on GitHub!
