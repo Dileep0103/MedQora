@@ -1,80 +1,66 @@
-# 🏥 Medqora — Healthcare Appointment Booking System
+# 🩺 Medqora — Healthcare Appointment Booking System
 > *Care, Scheduled Simply*
 
-Medqora is a full-stack MERN healthcare appointment booking platform that connects patients and doctors through a secure, role-based web application. It streamlines the process of scheduling medical appointments — making healthcare access simple, fast, and reliable.
+🩺 MedQora is a full-stack healthcare appointment booking platform built with the MERN stack (MongoDB, Express.js, React.js, Node.js). It lets patients book appointments with doctors, doctors manage their schedules and requests, and admins oversee the whole platform.
 
 ---
 
 ## 🚀 Features
 
-### 👤 Patient Features
-- User Registration & Login
-- JWT-based Secure Authentication
-- Browse & Search Available Doctors
-- Book / Reschedule Appointments
-- View Appointment History
-- Apply for Doctor Verification
-- Real-Time Notifications
+### 👤 Patient
+- Secure registration and login (JWT-based auth)
+- Browse all approved doctors
+- Book appointments and upload medical documents
+- View appointment status and history
 
-### 🩺 Doctor Features
-- Doctor Application & Approval Workflow
-- Manage Incoming Appointments
-- Update Appointment Status
-- Profile Management
+### 🩺 Doctor
+- Apply to become a doctor on the platform (pending admin approval)
+- Update profile details
+- View and manage incoming appointment requests
+- Accept or reject appointments
 
-### 👨‍💼 Admin Features
-- Admin Dashboard with Platform Statistics
-- Manage Users & Doctors
-- Approve / Reject Doctor Applications
-- Monitor All Appointments
+### 🛡️ Admin
+- View and manage all users and doctors
+- Approve or reject doctor applications
+- View all appointments across the platform
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- React.js + Vite
-- Axios
-- React Router DOM
-- Tailwind CSS
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB Atlas
-- Mongoose
-- JWT Authentication
-- Multer (File Uploads)
-
-### Tools & Services
-- Git & GitHub
-- MongoDB Atlas
-- Postman
+| Category        | Technologies |
+|------------------|--------------|
+| Frontend         | React.js, Vite, Material UI, Ant Design, React Bootstrap |
+| Backend          | Node.js, Express.js |
+| Database         | MongoDB, Mongoose |
+| Authentication   | JWT, bcryptjs |
+| File Uploads     | Multer |
+| Tools            | Git, GitHub, Postman |
 
 ---
 
 ## 📂 Project Structure
 
-```
+```bash
 Medqora/
 ├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── common/       # Home, Login, Register, Notification
-│   │   │   ├── user/         # DoctorList, Appointments, ApplyDoctor
-│   │   │   └── admin/        # AdminDashboard, Users, Doctors
-│   │   ├── api/
-│   │   │   └── axiosConfig.js
-│   │   └── App.jsx
-│   └── package.json
+│   ├── public/
+│   └── src/
+│       ├── api/            # Axios config
+│       ├── components/
+│       │   ├── admin/      # Admin dashboard views
+│       │   ├── common/     # Login, Register, Home, Notifications
+│       │   └── user/       # Patient/doctor views
+│       └── App.jsx
 │
 ├── backend/
-│   ├── controllers/          # userC.js, doctorC.js, adminC.js
-│   ├── routes/               # userRoutes, doctorRoutes, adminRoutes
-│   ├── schemas/              # userModel, docModel, appointmentModel
-│   ├── middlewares/          # authMiddleware.js
-│   ├── config/               # connectToDB.js
-│   └── package.json
+│   ├── config/             # DB connection
+│   ├── controllers/        # admin, doctor, user controllers
+│   ├── middlewares/        # JWT auth middleware
+│   ├── routes/             # admin, doctor, user routes
+│   ├── schemas/            # Mongoose models
+│   ├── uploads/            # Uploaded medical documents
+│   └── index.js
 │
 └── README.md
 ```
@@ -83,22 +69,38 @@ Medqora/
 
 ## ⚙️ Installation & Setup
 
-### 1. Clone Repository
+### Prerequisites
+- Node.js
+- npm
+- MongoDB (Atlas or local)
+- Git
 
-```bash
-git clone https://github.com/Dileep0103/MedQora.git
-cd MedQora
-```
-
-### 2. Backend Setup
+### 🔧 Backend Setup
 
 ```bash
 cd backend
 npm install
-npm start
 ```
 
-### 3. Frontend Setup (new terminal)
+Create a `.env` file inside `backend/` with:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_KEY=your_secret_key
+PORT=8001
+```
+
+Run the backend:
+
+```bash
+npm run dev
+```
+
+> Alternatively, `npm start` also works (runs `node index.js` without auto-reload).
+
+Server runs at `http://localhost:8001`.
+
+### 💻 Frontend Setup
 
 ```bash
 cd frontend
@@ -106,44 +108,52 @@ npm install
 npm run dev
 ```
 
-Frontend runs at: `http://localhost:3000`  
-Backend runs at: `http://localhost:8001`
+The app will be available at `http://localhost:3000`.
 
 ---
 
-## 🔐 Environment Variables
+## 🔌 API Overview
 
-Create a `.env` file inside the `backend/` folder:
+**User** (`/api/v1/user`)
+- `POST /register` – Register a new user
+- `POST /login` – User login
+- `POST /getuserdata` – Get logged-in user's data
+- `POST /registerdoc` – Apply to become a doctor
+- `GET /getalldoctorsu` – List all approved doctors
+- `POST /getappointment` – Book an appointment (with document upload)
+- `GET /getuserappointments` – Get user's appointments
 
-```env
-MONGO_URI=your_mongodb_connection_string
-JWT_KEY=your_jwt_secret_key
-PORT=8001
-```
+**Doctor** (`/api/v1/doctor`)
+- `POST /updateprofile` – Update doctor profile
+- `POST /handlestatus` – Accept/reject an appointment
 
-> ⚠️ Never commit your `.env` file to GitHub. Add it to `.gitignore`.
+**Admin** (`/api/v1/admin`)
+- `GET /getallusers` – List all users
+- `GET /getalldoctors` – List all doctors
+- `POST /getapprove` / `POST /getreject` – Approve/reject doctor applications
+- `GET /getallAppointmentsAdmin` – List all appointments
+
+All routes except register/login are protected by JWT auth middleware.
 
 ---
 
-## 🎯 Future Enhancements
+## 🔮 Future Enhancements
 
-- 💳 Online Payment Integration
-- 📹 Video Consultation
-- 📧 Email Notifications
-- 📋 Prescription Management
-- 🤖 AI-based Doctor Recommendations
+- Video consultation support
+- Online payment integration
+- Mobile app version
+- Advanced health analytics dashboard
 
 ---
 
 ## 👨‍💻 Author
 
-**Valluri Dileep Kumar**
-
-- 🔗 GitHub: [Dileep0103](https://github.com/Dileep0103)
-- 💼 LinkedIn: [Valluri Dileep Kumar](https://www.linkedin.com/in/valluri-dileep-kumar/)
+**Dileep Kumar**
+GitHub: [https://github.com/Dileep0103/MedQora](https://github.com/Dileep0103/MedQora)
 
 ---
 
-## ⭐ Support
+## 📄 License
 
-If you found this project useful, consider giving it a star ⭐ on GitHub!
+This project is licensed under the [MIT License](LICENSE).
+
