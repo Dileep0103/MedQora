@@ -72,40 +72,38 @@ const Login = () => {
 
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Container fluid>
-          <Navbar.Brand>
-            <Link
-              to="/"
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              YaseenCareBook
-            </Link>
-          </Navbar.Brand>
+      <Navbar expand="lg" bg="white" className="shadow-sm py-3">
+  <Container>
+    <Navbar.Brand
+      style={{
+        fontSize: "1.8rem",
+        fontWeight: "700",
+        color: "#2563EB",
+      }}
+    >
+      MedQora
+    </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="navbarScroll" />
+    <Navbar.Toggle aria-controls="navbarScroll" />
 
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
-              navbarScroll
-            ></Nav>
-
-            <Nav className="gap-3">
-              <Link to="/">Home</Link>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+    <Navbar.Collapse id="navbarScroll">
+      <Nav className="ms-auto gap-4">
+        <Link to="/">Home</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+      </Nav>
+    </Navbar.Collapse>
+  </Container>
+</Navbar>
 
       <RBContainer className="my-5">
         <Card style={{ border: 'none' }}>
-          <Row
-            style={{ background: 'rgb(190, 203, 203)' }}
-            className="g-0 p-3"
+          <Row className="g-0 p-4"
+                style={{
+                background: "#FFFFFF",
+                borderRadius: "20px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+              }}
           >
             <Col md={6}>
               <img
@@ -116,59 +114,82 @@ const Login = () => {
             </Col>
 
             <Col md={6}>
-              <div className="d-flex mx-5 flex-column">
-                <div className="d-flex flex-row mt-2 mb-5">
-                  <span className="h1 fw-bold mb-0">
-                    Sign in to your account
-                  </span>
-                </div>
+              <div className="d-flex mx-5 flex-column justify-content-center h-100">
 
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      name="email"
-                      value={user.email}
-                      onChange={handleChange}
-                      type="email"
-                      autoComplete="off"
-                    />
-                  </Form.Group>
+  <div className="mt-2 mb-4">
+    <h1
+      style={{
+        color: "#1E293B",
+        fontWeight: "700",
+        marginBottom: "10px",
+      }}
+    >
+      Welcome Back 👋
+    </h1>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      name="password"
-                      value={user.password}
-                      onChange={handleChange}
-                      type="password"
-                      autoComplete="off"
-                    />
-                  </Form.Group>
+    <p style={{ color: "#64748B" }}>
+      Login to continue your healthcare journey.
+    </p>
+  </div>
 
-                  <Button
-                    className="mb-4 px-5"
-                    variant="dark"
-                    size="lg"
-                    type="submit"
-                  >
-                    Login
-                  </Button>
-                </Form>
+  <Form onSubmit={handleSubmit}>
+    <Form.Group className="mb-3">
+      <Form.Label>Email</Form.Label>
+      <Form.Control
+        name="email"
+        value={user.email}
+        onChange={handleChange}
+        type="email"
+        autoComplete="off"
+        placeholder="Enter your email"
+      />
+    </Form.Group>
 
-                <p
-                  className="mb-5 pb-lg-2"
-                  style={{ color: '#393f81' }}
-                >
-                  Don't have an account?{' '}
-                  <Link
-                    to="/register"
-                    style={{ color: '#393f81' }}
-                  >
-                    Register here
-                  </Link>
-                </p>
-              </div>
+    <Form.Group className="mb-4">
+      <Form.Label>Password</Form.Label>
+      <Form.Control
+        name="password"
+        value={user.password}
+        onChange={handleChange}
+        type="password"
+        autoComplete="off"
+        placeholder="Enter your password"
+      />
+    </Form.Group>
+
+    <Button
+      type="submit"
+      className="mb-4"
+      style={{
+        backgroundColor: "#2563EB",
+        border: "none",
+        padding: "12px",
+        width: "100%",
+        borderRadius: "10px",
+        fontWeight: "600",
+      }}
+    >
+      Login
+    </Button>
+  </Form>
+
+  <p
+    className="mb-3"
+    style={{ color: "#64748B" }}
+  >
+    Don't have an account?{" "}
+    <Link
+      to="/register"
+      style={{
+        color: "#2563EB",
+        fontWeight: "600",
+      }}
+    >
+      Register here
+    </Link>
+  </p>
+
+</div>
             </Col>
           </Row>
         </Card>
