@@ -27,7 +27,7 @@ const UserHome = () => {
   const getUserData = async () => {
     try {
       const res = await axiosInstance.post(
-        '/api/user/getuserdata',
+        '/user/getuserdata',
         {},
         {
           headers: {
@@ -44,19 +44,22 @@ const UserHome = () => {
   };
 
   const getDoctorData = async () => {
-    try {
-      const res = await axiosInstance.get('/api/user/getalldoctorsu', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      });
-      if (res.data.success) {
-        setDoctors(res.data.data);
-      }
-    } catch (error) {
-      console.error('getDoctorData error:', error);
+  try {
+    const res = await axiosInstance.get('/user/getalldoctorsu', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
+
+    console.log(JSON.stringify(res.data, null, 2));
+
+    if (res.data.success) {
+      setDoctors(res.data.data);
     }
-  };
+  } catch (error) {
+    console.error('getDoctorData error:', error);
+  }
+};
 
   useEffect(() => {
     getUser();

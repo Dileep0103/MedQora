@@ -60,9 +60,45 @@ const DoctorList = ({ userDoctorId, doctor, userdata }) => {
    }
    return (
       <>
-         <Card style={{ width: '18rem' }}>
+         <Card
+  style={{
+    border: "none",
+    borderRadius: "16px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+    overflow: "hidden",
+    transition: "0.3s ease",
+    height: "100%",
+  }}
+>
             <Card.Body>
-               <Card.Title>Dr. {doctor.fullName}</Card.Title>
+               <div className="text-center mb-3">
+  <div
+    style={{
+      width: "80px",
+      height: "80px",
+      borderRadius: "50%",
+      background: "#DBEAFE",
+      color: "#2563EB",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: "28px",
+      fontWeight: "700",
+      margin: "0 auto",
+    }}
+  >
+    {doctor.fullName?.charAt(0)}
+  </div>
+</div>
+               <Card.Title
+  className="text-center"
+  style={{
+    fontWeight: "700",
+    color: "#1E293B",
+  }}
+>
+  Dr. {doctor.fullName}
+</Card.Title>
                <Card.Text>
                   <p>Phone: <b>{doctor.phone}</b></p>
                </Card.Text>
@@ -70,20 +106,50 @@ const DoctorList = ({ userDoctorId, doctor, userdata }) => {
                   <p>Address: <b>{doctor.address}</b></p>
                </Card.Text>
                <Card.Text>
-                  <p>Specialization: <b>{doctor.specialization}</b></p>
+                  <p>
+  Specialization:
+  <span
+    style={{
+      marginLeft: "8px",
+      background: "#DBEAFE",
+      color: "#2563EB",
+      padding: "4px 10px",
+      borderRadius: "20px",
+      fontSize: "12px",
+      fontWeight: "600",
+    }}
+  >
+    {doctor.specialization}
+  </span>
+</p>
                </Card.Text>
                <Card.Text>
                   <p>Experience: <b>{doctor.experience} Yrs</b></p>
                </Card.Text>
                <Card.Text>
-                  <p>Fees: <b>{doctor.fees}</b></p>
+                  <p>
+  Fees:
+  <b style={{ color: "#14B8A6" }}>
+    ₹{doctor.fees}
+  </b>
+</p>
                </Card.Text>
                <Card.Text>
                   <p>Timing: <b>{doctor.timings[0]} : {doctor.timings[1]}</b></p>
                </Card.Text>
-               <Button variant="primary" onClick={handleShow}>
-                  Book Now
-               </Button>
+               <Button
+  onClick={handleShow}
+  style={{
+    backgroundColor: "#2563EB",
+    border: "none",
+    width: "100%",
+    borderRadius: "10px",
+    padding: "10px",
+    fontWeight: "600",
+  }}
+>
+  Book Appointment
+</Button>
                <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                      <Modal.Title>Booking appointment</Modal.Title>

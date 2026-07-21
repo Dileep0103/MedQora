@@ -7,20 +7,23 @@ const userSchema = require("../schemas/userModel");
 const docSchema = require("../schemas/docModel");
 const appointmentSchema = require("../schemas/appointmentModel");
 
-
 /// for registering the user
 const registerController = async (req, res) => {
   try {
     // Check if user already exists
     const existsUser = await userSchema.findOne({ email: req.body.email });
     if (existsUser) {
-      return res.status(400).send({ message: "User already exists", success: false });
+      return res
+        .status(400)
+        .send({ message: "User already exists", success: false });
     }
 
     // Validate required fields
     const { fullName, email, password, phone, type } = req.body;
     if (!fullName || !email || !password || !phone || !type) {
-      return res.status(400).send({ message: "All fields are required", success: false });
+      return res
+        .status(400)
+        .send({ message: "All fields are required", success: false });
     }
 
     // Hash password
@@ -40,7 +43,9 @@ const registerController = async (req, res) => {
     return res.status(201).send({ message: "Register Success", success: true });
   } catch (error) {
     console.error("Register error:", error);
-    return res.status(500).send({ success: false, message: "Server error during registration" });
+    return res
+      .status(500)
+      .send({ success: false, message: "Server error during registration" });
   }
 };
 
@@ -50,23 +55,31 @@ const loginController = async (req, res) => {
 
     // Validate required fields
     if (!email || !password) {
-      return res.status(400).send({ message: "Email and password are required", success: false });
+      return res
+        .status(400)
+        .send({ message: "Email and password are required", success: false });
     }
 
     // Find user by email
     const user = await userSchema.findOne({ email });
     if (!user) {
-      return res.status(401).send({ message: "Invalid email or password", success: false });
+      return res
+        .status(401)
+        .send({ message: "Invalid email or password", success: false });
     }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).send({ message: "Invalid email or password", success: false });
+      return res
+        .status(401)
+        .send({ message: "Invalid email or password", success: false });
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_KEY, { expiresIn: "1d" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_KEY, {
+      expiresIn: "1d",
+    });
 
     user.password = undefined;
     return res.status(200).send({
@@ -77,10 +90,11 @@ const loginController = async (req, res) => {
     });
   } catch (error) {
     console.error("Login error:", error);
-    return res.status(500).send({ success: false, message: "Server error during login" });
+    return res
+      .status(500)
+      .send({ success: false, message: "Server error during login" });
   }
 };
-
 
 ////auth controller
 const authController = async (req, res) => {
@@ -154,8 +168,7 @@ const docController = async (req, res) => {
   }
 };
 
-
-////for the notification 
+////for the notification
 const getallnotificationController = async (req, res) => {
   try {
     const user = await userSchema.findOne({ _id: req.body.userId });
@@ -179,7 +192,6 @@ const getallnotificationController = async (req, res) => {
       .send({ message: "unable to fetch", success: false, error });
   }
 };
-
 
 ////for deleting the notification
 const deleteallnotificationController = async (req, res) => {
@@ -224,8 +236,8 @@ const getAllDoctorsControllers = async (req, res) => {
 const appointmentController = async (req, res) => {
   try {
     let { userInfo, doctorInfo } = req.body;
-    userInfo = JSON.parse(userInfo)
-    doctorInfo = JSON.parse(doctorInfo)
+    userInfo = JSON.parse(userInfo);
+    doctorInfo = JSON.parse(doctorInfo);
 
     let documentData = null;
     if (req.file) {
@@ -236,7 +248,7 @@ const appointmentController = async (req, res) => {
     }
 
     req.body.status = "pending";
-    
+
     const newAppointment = new appointmentSchema({
       userId: req.body.userId,
       doctorId: req.body.doctorId,
@@ -279,7 +291,7 @@ const getAllUserAppointments = async (req, res) => {
     });
 
     const doctorIds = allAppointments.map(
-      (appointment) => appointment.doctorId
+      (appointment) => appointment.doctorId,
     );
 
     const doctors = await docSchema.find({
@@ -288,7 +300,7 @@ const getAllUserAppointments = async (req, res) => {
 
     const appointmentsWithDoctor = allAppointments.map((appointment) => {
       const doctor = doctors.find(
-        (doc) => doc._id.toString() === appointment.doctorId.toString()
+        (doc) => doc._id.toString() === appointment.doctorId.toString(),
       );
       const docName = doctor ? doctor.fullName : "";
       return {
@@ -331,8 +343,6 @@ const getDocsController = async (req, res) => {
       .send({ message: "something went wrong", success: false, error });
   }
 };
-
-
 
 module.exports = {
   registerController,

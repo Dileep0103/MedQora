@@ -237,3 +237,10 @@ footer {
   background-color: white;
   border-top: 1px solid #e5e7eb;
 }
+.btn:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+.btn {
+  transition: all 0.3s ease;
+}

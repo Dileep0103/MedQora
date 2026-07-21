@@ -34,7 +34,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('/api/user/register', user);
+      const res = await axios.post('/user/register', user);
 
       if (res.data.success) {
         message.success('Registered Successfully');
@@ -61,151 +61,196 @@ const Register = () => {
     }
   };
 
-  return (
-    <>
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Container fluid>
-          <Navbar.Brand>
-            <Link
-              to="/"
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              YaseenCareBook
-            </Link>
-          </Navbar.Brand>
+ return (
+  <>
+    <Navbar expand="lg" bg="white" className="shadow-sm py-3">
+      <Container>
+        <Navbar.Brand
+          style={{
+            fontSize: "1.8rem",
+            fontWeight: "700",
+            color: "#2563EB",
+          }}
+        >
+          MedQora
+        </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle aria-controls="navbarScroll" />
 
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
-              navbarScroll
-            ></Nav>
+        <Navbar.Collapse id="navbarScroll">
+          <Nav className="ms-auto gap-4">
+            <Link to="/">Home</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
 
-            <Nav className="gap-3">
-              <Link to="/">Home</Link>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+    <RBContainer fluid className="px-4 my-5">
+      <Card style={{ border: "none" }}>
+        <Row
+          className="g-0 p-4"
+          style={{
+            background: "#FFFFFF",
+            borderRadius: "20px",
+            border: "1px solid #E2E8F0",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+          }}
+        >
+          {/* Left Side */}
+          <Col md={6} className="d-flex align-items-center">
+            <div className="w-100 px-4">
+              <h1
+                style={{
+                  color: "#1E293B",
+                  fontWeight: "700",
+                  fontSize: "2.2rem",
+                  marginBottom: "10px",
+                }}
+              >
+                Create Account 🚀
+              </h1>
 
-      <RBContainer className="my-5">
-        <Card style={{ border: 'none' }}>
-          <Row
-            style={{ background: 'rgb(190, 203, 203)' }}
-            className="g-0 p-3"
-          >
-            <Col md={6}>
-              <div className="d-flex mx-3 flex-column">
-                <div className="d-flex flex-row mb-2">
-                  <span className="h1 text-center fw-bold">
-                    Sign up to your account
-                  </span>
-                </div>
+              <p style={{ color: "#64748B" }}>
+                Join MedQora and manage your healthcare effortlessly.
+              </p>
 
-                <div className="p-2">
-                  <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-2">
-                      <Form.Label>Full Name</Form.Label>
-                      <Form.Control
-                        name="fullName"
-                        value={user.fullName}
-                        onChange={handleChange}
-                        type="text"
-                      />
-                    </Form.Group>
+              <div className="mt-4">
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Full Name</Form.Label>
+                    <Form.Control
+                      name="fullName"
+                      value={user.fullName}
+                      onChange={handleChange}
+                      type="text"
+                      placeholder="Enter your full name"
+                      style={{
+                        borderRadius: "10px",
+                        padding: "12px",
+                      }}
+                    />
+                  </Form.Group>
 
-                    <Form.Group className="mb-2">
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control
-                        name="email"
-                        value={user.email}
-                        onChange={handleChange}
-                        type="email"
-                      />
-                    </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      name="email"
+                      value={user.email}
+                      onChange={handleChange}
+                      type="email"
+                      placeholder="Enter your email"
+                      style={{
+                        borderRadius: "10px",
+                        padding: "12px",
+                      }}
+                    />
+                  </Form.Group>
 
-                    <Form.Group className="mb-2">
-                      <Form.Label>Password</Form.Label>
-                      <Form.Control
-                        name="password"
-                        value={user.password}
-                        onChange={handleChange}
-                        type="password"
-                      />
-                    </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      name="password"
+                      value={user.password}
+                      onChange={handleChange}
+                      type="password"
+                      placeholder="Create a password"
+                      style={{
+                        borderRadius: "10px",
+                        padding: "12px",
+                      }}
+                    />
+                  </Form.Group>
 
-                    <Form.Group className="mb-2">
-                      <Form.Label>Phone</Form.Label>
-                      <Form.Control
-                        name="phone"
-                        value={user.phone}
-                        onChange={handleChange}
-                        type="text"
-                      />
-                    </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control
+                      name="phone"
+                      value={user.phone}
+                      onChange={handleChange}
+                      type="text"
+                      placeholder="Enter your phone number"
+                      style={{
+                        borderRadius: "10px",
+                        padding: "12px",
+                      }}
+                    />
+                  </Form.Group>
 
-                    <div className="my-3">
-                      <Form.Check
-                        inline
-                        label="Admin"
-                        name="type"
-                        type="radio"
-                        value="admin"
-                        checked={user.type === 'admin'}
-                        onChange={handleChange}
-                      />
+                  <div className="d-flex gap-4 my-3">
+                    <Form.Check
+                      label="Admin"
+                      name="type"
+                      type="radio"
+                      value="admin"
+                      checked={user.type === "admin"}
+                      onChange={handleChange}
+                    />
 
-                      <Form.Check
-                        inline
-                        label="User"
-                        name="type"
-                        type="radio"
-                        value="user"
-                        checked={user.type === 'user'}
-                        onChange={handleChange}
-                      />
-                    </div>
+                    <Form.Check
+                      label="User"
+                      name="type"
+                      type="radio"
+                      value="user"
+                      checked={user.type === "user"}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                    <Button
-                      style={{ marginTop: '20px' }}
-                      variant="dark"
-                      size="lg"
-                      type="submit"
-                    >
-                      Register
-                    </Button>
-                  </Form>
-
-                  <p
-                    className="mb-5 pb-md-2 mt-3"
-                    style={{ color: '#393f81' }}
+                  <Button
+                    type="submit"
+                    className="mt-3 mb-3"
+                    style={{
+                      backgroundColor: "#2563EB",
+                      border: "none",
+                      padding: "12px",
+                      width: "100%",
+                      borderRadius: "10px",
+                      fontWeight: "600",
+                    }}
                   >
-                    Have an account?{' '}
-                    <Link to="/login" style={{ color: '#393f81' }}>
-                      Login here
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </Col>
+                    Create Account
+                  </Button>
+                </Form>
 
-            <Col md={6}>
-              <img
-                style={{ mixBlendMode: 'darken' }}
-                src={p2}
-                alt="register form"
-                className="rounded-start w-100"
-              />
-            </Col>
-          </Row>
-        </Card>
-      </RBContainer>
-    </>
-  );
+                <p
+                  className="mt-4"
+                  style={{ color: "#2563EB" }}
+                >
+                  Have an account?{" "}
+                  <Link
+                    to="/login"
+                    style={{ color: "#2563EB" }}
+                  >
+                    Login here
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </Col>
+
+          {/* Right Side */}
+          <Col
+            md={6}
+            className="d-flex align-items-center justify-content-centerpx-4"
+          >
+            <img
+              src={p2}
+              alt="register form"
+              className="img-fluid"
+              style={{
+                maxHeight: "600px",
+                objectFit: "contain",
+                mixBlendMode: "darken",
+              }}
+            />
+          </Col>
+        </Row>
+      </Card>
+    </RBContainer>
+  </>
+);
 };
 
 export default Register;
