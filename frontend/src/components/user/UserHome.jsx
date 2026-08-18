@@ -79,7 +79,7 @@ const UserHome = () => {
         <div className="layout">
           <div className="sidebar">
             <div className="logo">
-              <h2>YaseenCareBook</h2>
+              <h2>MedQora</h2>
             </div>
             <div className="menu">
               <div className="menu-items">
